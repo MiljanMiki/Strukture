@@ -1,0 +1,36 @@
+
+INSERT_PAT("Moj otac i tvoj otac su prijatelji"," Paja","otac")->
+-> "Moj otac Paja i tvoj otac su prijatelji"
+
+INSERT_PAT(T,P,Q)
+
+i<-index(T,Q)
+if(i=-1)
+    exit
+i<-i+lenght(Q)-1
+
+podNiz1 <-substring(T,0,i)
+podNiz2<-substring(T,i+1,lenght(T)-lenght(podNiz1))
+
+podNiz1<-concat(podNiz1,P)
+
+T<-concat(podNiz1,podNiz2)
+return T
+
+
+index(T,P)-vraca index PRVOG pojavljivanja uzorka P u tekstu T.Vraca -1 ako se uzorak ne nalazi u tekstu
+s<-index("Tvoja majka i moja majka su juce pile kafu","majka")
+s<-6 (indeksiranje pocinje od 0)
+
+lenght(S)-vraca duzinu niza (iliti broj karaktera,zajedno sa razmakom).
+i<-lenght("Danas je sreda")
+i<-14
+
+concat(S1,S2) - nadovezuje pocetak niza s2 na kraj niza s1.
+s3<-concat("Juce sam bio u gradu"," sa Milutinom")
+s3<-"Juce sam bio  ugradu sa Milutinom"
+
+substring(T,i,n) - uzima podniz iz teksta T, pocinjuci od pozicije i.N je duzina podniza
+koji se izdvaja
+s1<-substring("Ovo je primer za substring f-ju",4,8)
+s1<-"je prime"

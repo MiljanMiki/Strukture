@@ -1,0 +1,31 @@
+
+MaksEl(LL)
+if(head!=null)
+    exit
+prev<-null
+pom<-head
+max<-info(head)
+maxPtr<-head
+while(link(pom)!=null)
+    if(info(link(pom))>max)
+    then max<-info(link(pom))
+        prev<-pom
+        maxPtr<-link(pom)
+    
+    pom=link(pom)
+
+if(prev=null) -- znaci da je maxPtr ustvari head
+then head<-link(head)
+    freenode(maxPtr)
+else
+    link(prev)=link(maxPtr)
+    freenode(maxPtr)
+
+return max
+
+main(A,n,LL)
+
+for(i=n-1,0,-1)
+    A[i]<-max(LL)
+
+return

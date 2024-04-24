@@ -1,0 +1,32 @@
+
+BRISI_ZAM("Moj otac i tvoj otac su prijatelji","otac","Moj","stric") ->
+->"Moj i tvoj stric su prijatelji"
+
+BRISI_ZAM(T,P,Q,R) //vrši brisanje iz teksta T onih pojava uzorka P kojima prethodi 
+                   //uzorak Q ili zamena pojave uzorka P uzorkom R ako to nije slučaj.
+
+podNiz<-t
+do
+    i<-indexedDB(i,t)
+    k<-0
+    brisi<-true
+    j<-i-lenght(q)
+    while(k<lenght(Q) AND t[j]=Q[k])
+        k<-k+1
+        j<-j+1
+    if(k!=lenght(Q)) then
+        brisi<-false
+
+    if(brisi=true) then
+        podNiz1<-substring(t,0,i-1)
+        podNiz2<-substring(t,i+lenght(P)-1,lenght(t)-lenght(P))
+        t<-concat(podNiz1,podNiz2)
+    else
+        podNiz1<-substring(t,0,i-1)
+        podNiz1<-concat(podNiz1,R)
+        podNiz2<-substring(t,i,lenght(i))
+        t<-concat(podniz1,podNiz2)
+
+
+while(i<length(T)-length(p) AND i=-1)
+    

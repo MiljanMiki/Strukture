@@ -1,0 +1,31 @@
+Polovicno resenje,odnosno nije tacno.Ovo nalazi samo prvi uzorak
+s1 i brise ga,a ne sve
+
+Brisi(t,s1,s2)
+
+staraPozicija<-0
+novaPozicija<-index(t,s1)
+podNiz<-t
+if(novaPozicija=-1)
+return null
+
+while(novaPozicija<lenght(t)-(lenght(s1)+lenght(s2)) AND i!=-1)
+	pronadjen<-true
+	k<-0
+	i<-i+lenght(s1)-1
+	while(k<lenght(s2) AND pronadjen=true)
+		if(podNiz[t]!=s2[k])
+			pronadjen<-false
+		else
+			k<-k+1
+			i<-i+1
+	
+	if(pronadjen=true)
+		l<-i
+		pomocniNiz1=substring(t,0,l-(lenght(s1)+lenght(s2)+1)
+		pomocniNiz2<-substring(t,l+1,lenght(t)-lenght(pomocniNiz)-lenght(s2))
+		t<-concat(pomocniNiz1,pomocniNiz2)
+	else
+		podNiz<-substring(podNiz,i+1,lenght(t)-lenght(podNiz))
+		i<-index(podNiz,s1)
+
