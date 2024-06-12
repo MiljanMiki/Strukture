@@ -306,54 +306,44 @@ long GraphAsListsInt::topologicalOrderTravrsal() const
 	return retVal;
 }
 
-void GraphAsListsInt::toUndirected()//radi
+//vraca broj disjunktnih podgrafova koji sadrze barem jedan cvor veci od p
+int GraphAsListsInt::subgraphCnt(int p)
 {
-	LinkedNodeInt* ptr = start;
-	while (ptr != nullptr)
-	{
-		LinkedEdgeInt* pEdge = ptr->adj;
-		while (pEdge != nullptr)
-		{
-			if (findEdge(pEdge->dest->node, ptr->node) == nullptr)
-				insertEdge(pEdge->dest->node, ptr->node);
-			pEdge = pEdge->link;
-		}
-		ptr = ptr->next;
-	}
-}
-
-//u osnovi treba da prolazim kroz svaki cvor,i da zatim proveravam da li postoji
-//barem 1 put koji je duzi od k.Ne mora svaki cvor da ima put duzine k,dovoljno je 
-//samo jedan.
-int GraphAsListsInt::doesConnectedComponentExist(int k)
-{
-	if (k > nodeNum ||start==nullptr || nodeNum==0)
+	if (start == nullptr || nodeNum == 0)
 		return 0;
 
 	LinkedNodeInt* ptr = start;
-	StackAsArrayLinkedNodeInt stack(nodeNum);
-	setStatusForAllNodes(1);
-	bool postojiPut = false;
 
-	while (ptr != nullptr && !postojiPut)
+	StackAsArrayLinkedNodeInt stack(nodeNum);
+	//stack.push(ptr);
+	setStatusForAllNodes(1);
+	//ptr->status = 2;
+	int count = 0;
+
+	while (ptr != nullptr)
 	{
 		if (ptr->status != 2)
 		{
 			stack.push(ptr);
 			ptr->status = 2;
-			int duzinaPuta = 0;
-
+			bool inkrementirano = false;
+			if (ptr->node > p)
+			{
+				count++;
+				inkrementirano = true;
+			}
 			while (!stack.isEmpty())
 			{
-				LinkedNodeInt* pom = stack.pop(); pom->status = 2; duzinaPuta++;
+				LinkedNodeInt* pom = stack.pop(); pom->status = 2;
 				LinkedEdgeInt* pEdge = pom->adj;
-				if (duzinaPuta > k)
-				{
-					postojiPut = true;
-					break;
-				}
 				while (pEdge != nullptr)
 				{
+					if (!inkrementirano && pEdge->dest->node > p)
+					{
+						count++;
+						inkrementirano = true;
+					}
+
 					if (pEdge->dest->status == 1)
 					{
 						stack.push(pEdge->dest);
@@ -365,8 +355,23 @@ int GraphAsListsInt::doesConnectedComponentExist(int k)
 		}
 		ptr = ptr->next;
 	}
-	if (postojiPut)
-		return 1;
-	else
-		return 0;
+	return count;
+}
+
+void GraphAsListsInt::toUndirected()
+{
+	LinkedNodeInt* ptr = start;
+
+	while (ptr != nullptr)
+	{
+		LinkedEdgeInt* pEdge = ptr->adj;
+		while (pEdge != nullptr)
+		{
+			if (findEdge(pEdge->dest->node, ptr->node) == nullptr)
+				insertEdge(pEdge->dest->node, ptr->node);
+
+			pEdge = pEdge->link;
+		}
+		ptr = ptr->next;
+	}
 }
