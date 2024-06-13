@@ -45,6 +45,6 @@ void main()
 
 	//stablo2.inorder();
 
-	cout<<"Cvor sa najvecom razlikom parnih i neparnih brojeva njegovi podstabla je:\n"<<stablo.razlikaPodstabla();
+	cout<<"Cvor sa najvecom razlikom parnih i neparnih brojeva njegovi podstabla je:\n"<<stablo2.razlikaPodstabla();
 
 }

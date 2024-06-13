@@ -7,25 +7,25 @@ int main(int argc, char* argv[])
 {
 	GraphAsListsInt graf;
 
-	/*graf.insertNode(1);
-	graf.insertNode(2);
-	graf.insertNode(3);
-	graf.insertNode(4);
-	graf.insertNode(5);
-	graf.insertNode(6);
+	/*graf2.insertNode(1);
+	graf2.insertNode(2);
+	graf2.insertNode(3);
+	graf2.insertNode(4);
+	graf2.insertNode(5);
+	graf2.insertNode(6);
 
-	graf.insertEdge(1, 2);
-	graf.insertEdge(1, 5);
-	graf.insertEdge(1, 6);
-	graf.insertEdge(2,3);
-	graf.insertEdge(3,4);
-	graf.insertEdge(4,5);
-	graf.insertEdge(6,4);
+	graf2.insertEdge(1, 2);
+	graf2.insertEdge(1, 5);
+	graf2.insertEdge(1, 6);
+	graf2.insertEdge(2,3);
+	graf2.insertEdge(3,4);
+	graf2.insertEdge(4,5);
+	graf2.insertEdge(6,4);
 
-	graf.insertEdge(1,2);
-	graf.insertEdge(2,3);
-	graf.insertEdge(4,5);
-	graf.insertEdge(5,6);*/
+	graf2.insertEdge(1,2);
+	graf2.insertEdge(2,3);
+	graf2.insertEdge(4,5);
+	graf2.insertEdge(5,6);*/
 
 	graf.insertNode(1); graf.insertNode(2); graf.insertNode(3); graf.insertNode(4);
 	graf.insertNode(5); graf.insertNode(6); graf.insertNode(7); graf.insertNode(8);
