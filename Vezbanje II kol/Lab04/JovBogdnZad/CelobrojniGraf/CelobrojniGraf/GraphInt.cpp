@@ -305,6 +305,162 @@ long GraphAsListsInt::topologicalOrderTravrsal() const
 //  kroz treci zadati cvor i ne mora biti prost.
 void GraphAsListsInt::pathThroughNode(int dataFirst, int dataLast, int dataThrough)
 {
+	LinkedNodeInt* first = findNode(dataFirst);
+	LinkedNodeInt* finish = findNode(dataLast);
+	LinkedNodeInt* thru = findNode(dataThrough);
+	if (start == nullptr || finish == nullptr || thru == nullptr)
+		return;
+
+	LinkedNodeInt* ptr = start;
+	while (ptr != nullptr)
+	{
+		ptr->prev = nullptr;
+		ptr = ptr->next;
+	}
+	
+	setStatusForAllNodes(1);
+
+	StackAsArrayLinkedNodeInt stack(nodeNum);
+	stack.push(first);
+	first->status = 2;
+
+	bool dataOnPath = false;
+
+	while (!stack.isEmpty())
+	{
+		LinkedNodeInt* pom = stack.pop();
+		LinkedEdgeInt* pEdge = pom->adj;
+
+		while (pEdge != nullptr)
+		{
+			
+			if (pEdge->dest->status == 1)
+			{
+				pEdge->dest->status = 2;
+				stack.push(pEdge->dest);
+				pEdge->dest->prev = pom;
+			}
+			if (pEdge->dest == thru)
+			{
+				dataOnPath = true;
+				break;
+			}
+			if (pEdge->dest == finish)
+			{
+				if (dataOnPath)
+				{
+					cout << "Put je:" << endl;
+					finish->visit();
+					LinkedNodeInt* pomocniPtr = pom;
+					while (pomocniPtr != nullptr)
+					{
+						pomocniPtr->visit();
+						pomocniPtr = pomocniPtr->prev;
+					}
+					return;
+				}
+			}
+			pEdge = pEdge->link;
+		}
+	}
+
+
+
+	/*
+	setStatusForAllNodes(1);
+	LinkedNodeInt* ptr = start;
+
+	StackAsArrayLinkedNodeInt stack(nodeNum);
+	stack.push(ptr);
+	bool postojiOdStartDoThru = false;
+
+	LinkedNodeInt** niz = new LinkedNodeInt * [nodeNum]();
+	int p = 1;
+	niz[0] = start;
+
+	//ovo ce da bude samo prost put jbg nmg drugi da trazim
+	while (!postojiOdStartDoThru && !stack.isEmpty())
+	{
+		LinkedNodeInt* pom = stack.pop(); pom->status = 2;
+		LinkedEdgeInt* pEdge = pom->adj;
+
+		niz[p++] = pom;
+
+		while (pEdge != nullptr)
+		{
+			if (pEdge->dest == thru)
+			{
+				postojiOdStartDoThru = true;
+				niz[p++] = pEdge->dest;
+				break;
+			}
+			if (pEdge->dest->status == 1)
+				stack.push(pEdge->dest);
+			//if (!postojiOdStartDoThru)
+				//p--;
+			pEdge = pEdge->link;
+		}
+	}
+
+	if (postojiOdStartDoThru)
+	{
+		while (!stack.isEmpty())
+			stack.pop();
+
+		setStatusForAllNodes(1);
+		stack.push(thru);
+		niz[p++] = thru;
+		bool postojiOdThruDoFinish = false;
+
+		while (!stack.isEmpty() && !postojiOdThruDoFinish)
+		{
+			LinkedNodeInt* pom = stack.pop(); pom->status = 2;
+			niz[p++] = pom;
+
+			LinkedEdgeInt* pEdge = pom->adj;
+			while (pEdge != nullptr)
+			{
+				if (pEdge->dest == finish)
+				{
+					postojiOdThruDoFinish = true;
+					niz[p++] = pEdge->dest;
+					break;
+				}
+				if (pEdge->dest->status == 1)
+					stack.push(pEdge->dest);
+
+				//if (!postojiOdThruDoFinish)
+					//p--;
+				pEdge = pEdge->link;
+			}
+		}
+		if (postojiOdStartDoThru)
+		{
+			int* vecVidjeno = new int[p]; int k = 0;
+			cout << "put postoji i on je:" << endl;
+			//start->visit();
+			for (int i = 0; i < p; i++)
+			{
+				bool vecOdstampano = false;
+				for (int l = 0; l < k; l++)
+					if (niz[i]->node == vecVidjeno[l])
+						vecOdstampano = true;
+				if(!vecOdstampano)
+					niz[i]->visit();
+
+				vecVidjeno[k++] = niz[i]->node;
+			}
+		}
+		else
+			return;
+		
+
+	}
+	else
+		return;
+	*/
+
+	/*
 	LinkedNodeInt* start = findNode(dataFirst);
 	LinkedNodeInt* finish = findNode(dataLast);
 	LinkedNodeInt* through = findNode(dataThrough);
@@ -315,7 +471,7 @@ void GraphAsListsInt::pathThroughNode(int dataFirst, int dataLast, int dataThrou
 
 	//jedna od mogucnosti da imam 2 putanje,
 	// ****************************************
-	//jedva za od first to through, a druga od through do finish
+	//jedna za od first to through, a druga od through do finish
 	//i onda posle samo spojim 2 putanje/stampam jednu pa drugu putanju
 	//*****************************************
 	LinkedNodeInt** putanja = new LinkedNodeInt * [nodeNum]();
@@ -354,6 +510,7 @@ void GraphAsListsInt::pathThroughNode(int dataFirst, int dataLast, int dataThrou
 				putanja[i]->visit();
 		//finish->visit();
 	}
+	*/
 
 }
 
