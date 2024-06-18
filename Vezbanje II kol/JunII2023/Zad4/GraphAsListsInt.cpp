@@ -332,7 +332,7 @@ bool GraphAsListsInt::isCyclic()
 						stack.push(pEdge->dest);
 						pEdge->dest->status = 2;
 					}
-					else if (pEdge->dest == ptr)//bukv samo se proverava da li postoji put koji vodi nazad
+					else if (pEdge->dest == ptr || pEdge->dest->status==3)//bukv samo se proverava da li postoji put koji vodi nazad
 						return true;			//u pocetni cvor ptr. U svemu ostalom je obican DFS
 					pEdge = pEdge->link;
 

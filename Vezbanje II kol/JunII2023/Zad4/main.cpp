@@ -45,6 +45,6 @@ int main(int argc, char* argv[])
 	graf2.insertEdge(5, 1);
 	graf2.insertEdge(5, 4);
 
-	cout << "Da li je graf ciklican: " << graf.isCyclic();
+	cout << "Da li je graf ciklican: " << graf2.isCyclic();
 }
 
